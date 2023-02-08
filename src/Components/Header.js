@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <header className="header row">
+    <header className="header row container">
       <img src="" alt="Logo de Vinted" className="logo" />
       <input type="text" placeholder="Recherche des articles" />
       <div className="login-action">
