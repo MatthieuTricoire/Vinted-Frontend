@@ -1,38 +1,54 @@
-.App {
-  text-align: center;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*? General  */
+
+body {
+  margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+  font-size: 34px;
+  line-height: 43px;
+  color: #171717;
+}
+/*? Utility */
+
+.row {
+  display: flex;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.column {
   display: flex;
   flex-direction: column;
+}
+
+/*? Header */
+
+.header {
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  height: 60px;
 }
 
-.App-link {
-  color: #61dafb;
+/*? Main  */
+/** Hero  */
+.hero {
+  height: 300px;
+  background-image: url(./Assets/Img/Hero-Banner.jpeg);
+  background-size: cover;
+  background-position: center;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hero__card {
+  width: 318px;
+  height: 233px;
+  background-color: white;
+  padding: 2em;
+  margin-left: 100px;
+  border-radius: 5px;
 }
