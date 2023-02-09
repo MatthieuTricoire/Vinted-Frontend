@@ -4,10 +4,23 @@
   box-sizing: border-box;
 }
 
+/* Variables */
+:root {
+  --ff-primary: Lato, sans-serif;
+}
+
+/*? Fonts import */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap");
+
 /*? General  */
 
 body {
   margin: 0;
+  font-family: var(--ff-primary);
+}
+button {
+  color: inherit;
+  font-family: inherit;
 }
 img {
   max-width: 100%;
@@ -85,4 +98,29 @@ section {
 
 .article__details__txt {
   gap: 5px;
+}
+
+/*? Offer page  */
+
+.background-offer {
+  border: solid 1px red;
+  background-color: hsl(179, 11%, 96%);
+}
+.offer {
+  padding-block: 3rem;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.offer__img {
+  height: 300px;
+  object-fit: contain;
+}
+
+.offer__description {
+  background-color: white;
+  border-radius: 5px;
+  border: solid 1px red;
+  padding: 3rem;
+  justify-content: space-between;
 }

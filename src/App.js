@@ -9,6 +9,7 @@ import axios from "axios";
 //* Pages import
 import Home from "./Pages/Home";
 import Offer from "./Pages/Offer";
+import SignUp from "./Pages/SignUp";
 
 //* Components import
 import "./App.css";
@@ -41,6 +42,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home data={data} />}></Route>
         <Route path="/offer/:id" element={<Offer />}></Route>
+        <Route path="/SignIn"></Route>
+        <Route path="/SignUp" element={<SignUp />}></Route>
       </Routes>
     </Router>
   );

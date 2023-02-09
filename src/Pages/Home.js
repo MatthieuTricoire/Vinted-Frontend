@@ -15,11 +15,8 @@ const Home = ({ data }) => {
       </div>
       <section className="container row articles">
         {data.offers.map((offer) => {
-          return (
-            <Link to={`/offer/${offer._id}`}>
-              <Article offer={offer} key={offer._id} />;
-            </Link>
-          );
+          // <MenuItem component={Link} to={'/first'}>Team 1</MenuItem>
+          return <Article offer={offer} key={offer._id} />;
         })}
       </section>
     </div>
