@@ -3,14 +3,22 @@
 *::after {
   box-sizing: border-box;
 }
+/*? Fonts import */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap");
 
 /* Variables */
 :root {
+  /*? fonts families */
   --ff-primary: Lato, sans-serif;
-}
 
-/*? Fonts import */
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap");
+  /*? fonts colors  */
+
+  --clr-primary-000: white;
+  --clr-primary-900: black;
+  --clr-primary-400: #999999;
+
+  --clr-accent-400: #2cb1ba;
+}
 
 /*? General  */
 
@@ -19,8 +27,12 @@ body {
   font-family: var(--ff-primary);
 }
 button {
-  color: inherit;
+  padding: 0.3em 1em;
+  color: var(--clr-primary-000);
   font-family: inherit;
+  background-color: var(--clr-accent-400);
+  border-radius: 5px;
+  border: none;
 }
 img {
   max-width: 100%;
@@ -52,6 +64,11 @@ section {
   flex-direction: column;
 }
 
+/*? App  */
+
+.app {
+  position: relative;
+}
 /*? Header */
 
 .header {
@@ -123,4 +140,53 @@ section {
   border: solid 1px red;
   padding: 3rem;
   justify-content: space-between;
+}
+
+/*? Login page */
+
+.btn__login {
+  background-color: var(--clr-primary-000);
+  color: var(--clr-accent-400);
+  border: solid 1px var(--clr-accent-400);
+}
+/*? Modal */
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  backdrop-filter: blur(3px);
+}
+.modal__container {
+  background-color: white;
+  border-radius: 10px;
+}
+.modal__container__btn {
+  margin-top: 10px;
+  margin-right: 10px;
+  align-self: flex-end;
+}
+
+/*? Form */
+
+form {
+  padding: 8em;
+
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+form p {
+  width: 400px;
+}
+
+.checkbox {
+  align-items: center;
 }

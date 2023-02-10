@@ -10,6 +10,8 @@ import axios from "axios";
 import Home from "./Pages/Home";
 import Offer from "./Pages/Offer";
 import SignUp from "./Pages/SignUp";
+import SignIn from "./Pages/SignIn";
+import Modal from "./Components/Modal";
 
 //* Components import
 import "./App.css";
@@ -19,13 +21,24 @@ function App() {
   //? States declaration
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [token, setToken] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [initializeModal, setInitializeModal] = useState("");
+  const [searchParameters, setSearchParameters] = useState({ title: "robe" });
 
+  console.log(searchParameters);
+  let searchRoute = "https://lereacteur-vinted-api.herokuapp.com/offers";
+  if (searchParameters) {
+    searchRoute = searchRoute + "?";
+    searchParameters.title &&
+      (searchRoute = searchRoute + `title=${searchParameters.title}`);
+    searchParameters.pricemin &&
+      (searchRoute += `priceMin=${searchParameters.primcemin}`);
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://lereacteur-vinted-api.herokuapp.com/offers"
-        );
+        const response = await axios.get(searchRoute);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -33,19 +46,44 @@ function App() {
       }
     };
     fetchData();
-  }, []);
+  }, [searchParameters]);
+
   return isLoading ? (
     <p>Loading ...</p>
   ) : (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home data={data} />}></Route>
-        <Route path="/offer/:id" element={<Offer />}></Route>
-        <Route path="/SignIn"></Route>
-        <Route path="/SignUp" element={<SignUp />}></Route>
-      </Routes>
-    </Router>
+    <div className="app">
+      <Router>
+        <Header
+          token={token}
+          setToken={setToken}
+          modal={modalVisible}
+          setModal={setModalVisible}
+          initializeModal={initializeModal}
+          setInitializeModal={setInitializeModal}
+          searchParameters={searchParameters}
+          setSearchParameters={setSearchParameters}
+        />
+        <Routes>
+          <Route path="/" element={<Home data={data} />}></Route>
+          <Route path="/offer/:id" element={<Offer />}></Route>
+          <Route
+            path="/SignIn"
+            element={<SignIn token={token} setToken={setToken} />}
+          ></Route>
+          <Route
+            path="/SignUp"
+            element={<SignUp token={token} setToken={setToken} />}
+          ></Route>
+        </Routes>
+        {modalVisible && (
+          <Modal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            initializeModal={initializeModal}
+          />
+        )}
+      </Router>
+    </div>
   );
 }
 

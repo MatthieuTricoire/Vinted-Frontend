@@ -1,10 +1,13 @@
 //? Reacter Router import
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 //? Components import
 import Article from "../Components/Article";
 
 const Home = ({ data }) => {
+  //? States declaration
+
   return (
     <div className="main">
       <div className="hero row">
