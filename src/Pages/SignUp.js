@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 //? Axios import
 import axios from "axios";
 
-const SignUp = ({ setToken }) => {
+const SignUp = ({ setToken, setModalVisible, modalVisible }) => {
   //   const emailRef = useRef();
   //   const passwordRef = useRef();
   //   const usernameRef = useRef();
@@ -34,7 +34,7 @@ const SignUp = ({ setToken }) => {
       );
       Cookies.set("token", loginInformation.data.token, { expires: 1 });
       setToken(loginInformation.data.token);
-      navigate("/");
+      setModalVisible(!modalVisible)
     } catch (error) {
       console.log(error.response);
     }

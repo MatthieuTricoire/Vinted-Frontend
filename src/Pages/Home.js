@@ -1,6 +1,5 @@
 //? Reacter Router import
-import { useState } from "react";
-import { Link } from "react-router-dom";
+
 
 //? Components import
 import Article from "../Components/Article";
