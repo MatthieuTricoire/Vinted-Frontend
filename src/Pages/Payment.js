@@ -1,21 +1,30 @@
 //? React router dom import
 import { useLocation } from "react-router-dom"
 
-// //? Stripe import
+//? Stripe import
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import CheckoutForm from "./components/CheckoutForm";
+
+//? Components import 
+import CheckoutForm from "../Components/CheckoutForm";
+
+const stripePromise = loadStripe("pk_test_51HCObyDVswqktOkX6VVcoA7V2sjOJCUB4FBt3EOiAdSz5vWudpWxwcSY8z2feWXBq6lwMgAb5IVZZ1p84ntLq03H00LDVc2RwP")
+
 
 const Payment = () => {
 
-    const stripePromise = loadStripe("pk_test_51IpvphDqQKb3lCIT3UU1fIPnAXyyG57gLns831kNwLVGCFo1a3MtSucuiIwEijgip8fL85zUlKZKTK0a2JAhSWHt00ZWSjTErF")
+
 
     const data = useLocation();
     console.log(data)
-    console.log(data.state.data.product_price)
+    const user_id = data.state.data.owner._id;
+    console.log(user_id);
     const price = data.state.data.product_price.toFixed(2)
     const fee = (price * 1.10).toFixed(2)
     const shippingFee = 5.2
+    const totalPrice = price * 1 + fee * 1 + shippingFee * 1
+    const totalPriceCents = totalPrice * 1000
+    const product_description = data.state.data.product_description
     return (
         <div className="section">
 
@@ -33,10 +42,10 @@ const Payment = () => {
                 <div className="col">Frais de port</div>
                 <div className="col">{shippingFee} €</div>
             </div>
-            <div> Total {price * 1 + fee * 1 + shippingFee * 1} €</div>
+            <div> Total {totalPrice} €</div>
 
-            <Elements stripe={stripePromise}>
-                <CheckoutForm />
+            <Elements stripe={stripePromise} >
+                <CheckoutForm user_id={user_id} amount={totalPriceCents} title={product_description} />
             </Elements>
 
 
