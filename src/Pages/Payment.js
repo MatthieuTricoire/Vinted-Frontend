@@ -2,13 +2,13 @@
 import { useLocation } from "react-router-dom"
 
 // //? Stripe import
-// import { loadStripe } from "@stripe/stripe-js";
-// import { Elements } from "@stripe/react-stripe-js";
-// import CheckoutForm from "./components/CheckoutForm";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./components/CheckoutForm";
 
 const Payment = () => {
 
-    // const stripePromise = loadStripe("pk_test_51IpvphDqQKb3lCIT3UU1fIPnAXyyG57gLns831kNwLVGCFo1a3MtSucuiIwEijgip8fL85zUlKZKTK0a2JAhSWHt00ZWSjTErF")
+    const stripePromise = loadStripe("pk_test_51IpvphDqQKb3lCIT3UU1fIPnAXyyG57gLns831kNwLVGCFo1a3MtSucuiIwEijgip8fL85zUlKZKTK0a2JAhSWHt00ZWSjTErF")
 
     const data = useLocation();
     console.log(data)
@@ -35,9 +35,9 @@ const Payment = () => {
             </div>
             <div> Total {price * 1 + fee * 1 + shippingFee * 1} €</div>
 
-            {/* <Elements stripe={stripePromise}>
+            <Elements stripe={stripePromise}>
                 <CheckoutForm />
-            </Elements> */}
+            </Elements>
 
 
         </div>

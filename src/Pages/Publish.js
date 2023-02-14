@@ -141,7 +141,7 @@ const Publish = ({ token, setModalVisible, modalVisible, setInitializeModal }) =
             </form>
         </section>
     ) : (< Navigate to="/" />)
-    //  setModalVisible(!modalVisible) setInitializeModal("SignIn"))
+    //  )
 
 }
 
