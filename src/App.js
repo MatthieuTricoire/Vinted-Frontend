@@ -117,7 +117,7 @@ function App() {
           setSearchParameters={setSearchParameters}
         />
         <Routes>
-          <Route path="/" element={<Home data={data} />}></Route>
+          <Route path="/" element={<Home data={data} token={token} modalVisible={modalVisible} setModalVisible={setModalVisible} />}></Route>
           <Route path="/offer/:id" element={<Offer />}></Route>
           <Route
             path="/Publish" element={<Publish token={token} setModalVisible={setModalVisible} modalVisible={modalVisible} setInitializeModal={setInitializeModal} />}></Route>

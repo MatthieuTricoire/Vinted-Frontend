@@ -35,7 +35,8 @@ const CheckoutForm = ({ user_id, amount, title }) => {
                 title: title,
                 amount: amount,
             });
-            if (response.data === "succeeded") {
+            console.log(response)
+            if (response.data.status === "succeeded") {
                 setIsLoading(false);
                 setCompleted(true);
             }
@@ -46,9 +47,9 @@ const CheckoutForm = ({ user_id, amount, title }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Informations bancaires pour le paiement</h2>
-            <CardElement />
+        <form className="column" onSubmit={handleSubmit}>
+            <div className="strip__title" >Informations bancaires pour le paiement</div>
+            <div className="cardElement input-txt"><CardElement /></div>
 
             {completed ? (
                 <div className="payment--done">Bien joué, super affaire ! Paiement effectué 💸</div>

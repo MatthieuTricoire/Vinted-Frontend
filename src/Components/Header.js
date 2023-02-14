@@ -5,7 +5,7 @@
 // import { useCallback } from "react";
 
 //? React Router import
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 
 //? Import logo vinted
@@ -21,6 +21,8 @@ const Header = ({
   setSearchParameters,
 }) => {
 
+  const { pathname } = useLocation();
+  console.log(pathname);
   const navigate = useNavigate();
 
   const disconnect = () => {
@@ -71,7 +73,7 @@ const Header = ({
             </>
           ) : (
             <button
-              className="btn btn--dark btn--test"
+              className="btn  btn--cancel"
               onClick={() => {
                 disconnect();
               }}
@@ -92,48 +94,54 @@ const Header = ({
             className="btn btn--dark">Vends tes articles</button>
         </div>
       </header>
-      <div className="filter container row">
-        <label htmlFor="pricemin">Prix minimum</label>
-        <input
-          onChange={(e) => {
-            const copy = { ...searchParameters };
-            copy.pricemin = e.target.value;
-            setSearchParameters(copy);
-          }}
-          value={searchParameters.pricemin}
-          type="number"
-          placeholder="0"
-          name="pricemin"
-          id="pricemin"
-          className="input-txt small-input"
-        />
-        <label htmlFor="pricemax">Prix maximum</label>
-        <input
-          onChange={(e) => {
-            const copy = { ...searchParameters };
-            copy.pricemax = e.target.value;
-            setSearchParameters(copy);
-          }}
-          value={searchParameters.pricemax}
-          type="number"
-          name="pricemax"
-          id="pricemax"
-          placeholder={9999}
-          className="input-txt small-input"
-        />
-        <label className="sortCheckboxLabel" htmlFor="sortArticles"></label>
-        <input
-          onClick={() => {
-            const copy = { ...searchParameters };
-            copy.sort = !copy.sort;
-            setSearchParameters(copy);
-          }}
-          type="checkbox"
-          name="sortArticles"
-          id="sortArticles"
-          className="sortCheckbox"
-        />
-      </div>
+      {pathname !== "/" ? null :
+        <div className="filter container row">
+          <label htmlFor="pricemin">Prix minimum : </label>
+          <input
+            onChange={(e) => {
+              const copy = { ...searchParameters };
+              copy.pricemin = e.target.value;
+              setSearchParameters(copy);
+            }}
+            value={searchParameters.pricemin}
+            type="number"
+            placeholder="0"
+            name="pricemin"
+            id="pricemin"
+            className="input-txt small-input"
+          />
+          <label htmlFor="pricemax">Prix maximum : </label>
+          <input
+            onChange={(e) => {
+              const copy = { ...searchParameters };
+              copy.pricemax = e.target.value;
+              setSearchParameters(copy);
+            }}
+            value={searchParameters.pricemax}
+            type="number"
+            name="pricemax"
+            id="pricemax"
+            placeholder={9999}
+            className="input-txt small-input"
+          />
+          <span>Tri croissant</span>
+          <label className="switch" htmlFor="sortArticles">
+            <input
+              onClick={() => {
+                const copy = { ...searchParameters };
+                copy.sort = !copy.sort;
+                setSearchParameters(copy);
+              }}
+              type="checkbox"
+              id="sortArticles"
+              className="sortCheckbox"
+            />
+            <span className="slider" ></span>
+          </label>
+          <span>Tri décroissant</span>
+
+        </div>
+      }
     </>
   );
 };

@@ -30,9 +30,8 @@ const Offer = () => {
   ) : (
     <div className="background">
       <div className="offer row container">
-        <div className="col">
+        <div className="col offer__img">
           <img
-            className="offer__img"
             src={data.product_pictures[0].url}
             alt=""
           />

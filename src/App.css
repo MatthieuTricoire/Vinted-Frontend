@@ -71,6 +71,16 @@ body {
   border-color: var(--clr-accent-400-hover);
 }
 
+.btn--cancel {
+  color: var(--clr-primary-000);
+  background-color: hsl(334, 90%, 63%);
+  border: solid 1px hsl(334, 90%, 63%);
+}
+
+.btn--cancel:hover {
+  background-color: hsl(334, 90%, 53%);
+}
+
 .input-txt {
   background-color: var(--clr-primary-200);
   background-color: hsl(208, 13%, 96%);
@@ -88,6 +98,7 @@ body {
 .small-input {
   width: 100px;
   text-align: center;
+  margin-right: 30px;
 }
 
 img {
@@ -106,6 +117,10 @@ h2 {
 section {
   padding-block: 30px;
 }
+
+a {
+  text-decoration: none;
+}
 /*? Utility */
 
 .container {
@@ -121,6 +136,15 @@ section {
 .column {
   display: flex;
   flex-direction: column;
+}
+
+.highlight-txt {
+  color: var(--clr-accent-400);
+  cursor: pointer;
+}
+
+.highlight-txt:hover {
+  text-decoration: underline;
 }
 
 /*? App  */
@@ -148,7 +172,7 @@ section {
 .filter {
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
@@ -231,13 +255,16 @@ section {
 }
 
 .offer__img {
+  width: 60%;
+}
+.offer__img img {
   object-fit: contain;
   height: 100%;
   width: 100%;
 }
 
 .offer__description {
-  width: 400px;
+  width: 40%;
   background-color: white;
   border-radius: 5px;
   padding: 3rem;
@@ -342,76 +369,130 @@ section {
 
 .publish-offer {
   padding-inline: 100px;
+  padding-bottom: 50px;
 }
+
 .offer-section {
   background-color: var(--clr-primary-000);
   border-radius: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   padding-block: 30px;
   padding-inline: 200px;
   width: 100%;
 }
+
+.upload-file {
+  align-items: center;
+  justify-content: space-between;
+}
+.thumbnail {
+  width: 25%;
+}
 .offer-section > .col {
   justify-content: space-evenly;
   width: 100%;
-  gap: 20px;
+  gap: 10px;
 }
-/*? Custom Sort checkbox */
+
+/*? Payment * */
+
+.payment {
+  margin-top: 40px;
+  border-radius: 5px;
+  width: 50%;
+  height: 70%;
+  padding-block: 50px;
+  background-color: var(--clr-primary-000);
+  gap: 20px;
+  align-items: center;
+  color: var(--clr-primary-500);
+}
+
+.payment__title {
+  font-size: var(--fs-300);
+  color: var(--clr-primary-400);
+}
+
+.payment-details {
+  width: 50%;
+  justify-content: space-between;
+}
+
+.payment__total-price {
+  font-size: var(--fs-600);
+  font-weight: bold;
+}
+
+.strip__title {
+  font-size: var(--fs-600);
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.payment--done {
+  color: var(--clr-accent-400);
+  text-align: center;
+  font-weight: bold;
+  font-size: var(--fs-600);
+}
+.cardElement {
+  margin-bottom: 20px;
+}
+
 /*? custom toggle button  */
 
-/** step 1 --> Hide the input element */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 55px;
+  height: 30px;
+}
+
 .sortCheckbox {
+  opacity: 0;
   width: 0;
   height: 0;
-  visibility: hidden;
 }
 
-/** step2 --> Style the label to be used as the graphic input */
-
-.sortCheckboxLabel {
-  display: block;
-  width: 40px;
-  height: 20px;
-  border-radius: 100px;
-  position: relative;
-  cursor: pointer;
-  background-color: var(--clr-accent-400);
-}
-
-.sortCheckbox:checked + .sortCheckboxLabel {
-  background-color: blue;
-}
-
-/** step 3 --> Create the toggle ball */
-.sortCheckboxLabel::after {
-  content: "";
-  width: 16px;
-  height: 16px;
-  border-radius: 50px;
-  background-color: var(--clr-primary-000);
+.slider {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  transition: 0.5s;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+  cursor: pointer;
+  inset: 0;
+  /* background quand à gauche */
+  background-color: var(--clr-accent-400);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50px;
+  border: 1px var(--clr-accent-400) solid;
 }
 
-.sortCheckbox:checked + .sortCheckboxLabel::after {
-  background-color: var(--clr-primary-000);
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 5px;
+  bottom: 2px;
+  /* boule quand à gauche */
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
 }
 
-/** step 4 --> Animate the toggle ball */
-.sortCheckbox:checked + .sortCheckboxLabel:after {
-  left: 100%;
-  transform: translateX(-100%);
+.sortCheckbox:checked + .slider {
+  /* background quand à droite */
+  background-color: var(--clr-primary-200);
+  border-radius: 1px red solid;
+}
+.sortCheckbox:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
 }
 
-/** step 5 --> custom effect during the activation */
-
-.sortCheckboxLabel:active::after {
-  width: 30px;
-}
-
-.test {
-  border: 1px solid red;
+.sortCheckbox:checked + .slider::before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+  background-color: var(--clr-accent-400);
 }

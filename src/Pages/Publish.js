@@ -64,10 +64,12 @@ const Publish = ({ token, setModalVisible, modalVisible, setInitializeModal }) =
 
                 <h2 className="publish__title" >Vends ton article</h2>
 
-                <div className="offer-section test">
-                    <input onChange={(e) => {
+                <div className="offer-section upload-file row">
+                    <label className="btn--dark btn" htmlFor="load-file">Sélectionner une image</label>
+                    <input hidden onChange={(e) => {
                         setFile(e.target.files[0])
-                    }} type="file" name="" id="" />
+                    }} type="file" name="load-file" id="load-file" />
+                    {file && <img className="thumbnail" src={URL.createObjectURL(file)} alt="Article en vente" />}
                 </div>
                 <div className="offer-section row">
                     <div className="col column">
@@ -120,10 +122,11 @@ const Publish = ({ token, setModalVisible, modalVisible, setInitializeModal }) =
                             setPrice(e.target.value)
                         }} value={price} type="number" name="price" id="price" placeholder="0,00€" />
                         <div row>
-                            <label htmlFor="trade">Je suis intéressé(e) par les échanges</label>
                             <input onClick={() => {
                                 setTrade(!trade)
                             }} type="checkbox" name="trade" id="trade" />
+                            <label htmlFor="trade">Je suis intéressé(e) par les échanges</label>
+
                         </div>
                     </div>
                 </div>

@@ -80,8 +80,7 @@ const SignUp = ({ handleToken, setModalVisible, modalVisible, initializeModal, s
         </p>
         <button className="btn btn--dark" type="submit">S'incrire</button>
 
-        {/* <Link to="/SignIn"> Tu as déjà un compte ? Connecte-toi !</Link> */}
-        <div
+        <div className="highlight-txt"
           onClick={() => {
             setInitializeModal("SignIn");
           }}> Tu as déjà un compte ? Connecte-toi !</div>
