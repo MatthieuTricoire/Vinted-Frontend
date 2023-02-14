@@ -42,53 +42,55 @@ function App() {
       Cookies.remove("token-vinted")
     }
   }
-  let searchRoute = "https://lereacteur-vinted-api.herokuapp.com/offers";
 
-  //! Partie de code à refacto, /offers/&&&priceMin=10 fonctionne. Pas besoin de se prendr la tête avec une construction dymanique des queries.
-  if (searchParameters) {
-    searchRoute = searchRoute + "?";
-    let firstFilter = true;
-    if (searchParameters.title) {
-      if (firstFilter) {
-        searchRoute += `title=${searchParameters.title}`;
-        firstFilter = false;
-      } else {
-        searchRoute += `&title=${searchParameters.title}`;
-      }
-    }
-    if (searchParameters.pricemin) {
-      if (firstFilter) {
-        searchRoute += `priceMin=${searchParameters.pricemin}`;
-        firstFilter = false;
-      } else {
-        searchRoute += `&priceMin=${searchParameters.pricemin}`;
-      }
-    }
-    if (searchParameters.pricemax) {
-      if (firstFilter) {
-        searchRoute += `priceMax=${searchParameters.pricemax}`;
-        firstFilter = false;
-      } else {
-        searchRoute += `&priceMax=${searchParameters.pricemax}`;
-      }
-    }
-    if (searchParameters.sort) {
-      if (firstFilter) {
-        searchRoute += `sort=price-asc`;
-        firstFilter = false;
-      } else {
-        searchRoute += `&sort=price-asc`;
-      }
-    } else {
-      if (firstFilter) {
-        searchRoute += `sort=price-desc`;
-        firstFilter = false;
-      } else {
-        searchRoute += `&sort=price-desc`;
-      }
-    }
-  }
   useEffect(() => {
+    let searchRoute = "https://lereacteur-vinted-api.herokuapp.com/offers";
+
+    //! Partie de code à refacto, /offers/&&&priceMin=10 fonctionne. Pas besoin de se prendr la tête avec une construction dymanique des queries.
+    if (searchParameters) {
+      searchRoute = searchRoute + "?";
+      let firstFilter = true;
+      if (searchParameters.title) {
+        if (firstFilter) {
+          searchRoute += `title=${searchParameters.title}`;
+          firstFilter = false;
+        } else {
+          searchRoute += `&title=${searchParameters.title}`;
+        }
+      }
+      if (searchParameters.pricemin) {
+        if (firstFilter) {
+          searchRoute += `priceMin=${searchParameters.pricemin}`;
+          firstFilter = false;
+        } else {
+          searchRoute += `&priceMin=${searchParameters.pricemin}`;
+        }
+      }
+      if (searchParameters.pricemax) {
+        if (firstFilter) {
+          searchRoute += `priceMax=${searchParameters.pricemax}`;
+          firstFilter = false;
+        } else {
+          searchRoute += `&priceMax=${searchParameters.pricemax}`;
+        }
+      }
+      if (searchParameters.sort) {
+        if (firstFilter) {
+          searchRoute += `sort=price-asc`;
+          firstFilter = false;
+        } else {
+          searchRoute += `&sort=price-asc`;
+        }
+      } else {
+        if (firstFilter) {
+          searchRoute += `sort=price-desc`;
+          firstFilter = false;
+        } else {
+          searchRoute += `&sort=price-desc`;
+        }
+      }
+    }
+
     const fetchData = async () => {
       try {
         const response = await axios.get(searchRoute);
