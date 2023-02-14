@@ -1,6 +1,3 @@
-//? Cookies package import
-import Cookies from "js-cookie";
-
 //? Import debouncer
 // import debounce from "lodash.debounce";
 
@@ -15,11 +12,10 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../Assets/Img/logo.svg";
 
 const Header = ({
-  setToken,
   token,
+  handleToken,
   modal,
   setModal,
-  initializeModal,
   setInitializeModal,
   searchParameters,
   setSearchParameters,
@@ -28,8 +24,7 @@ const Header = ({
   const navigate = useNavigate();
 
   const disconnect = () => {
-    setToken("");
-    Cookies.remove("token");
+    handleToken(null);
   };
 
   const handleTextFiltering = (event) => {
@@ -38,10 +33,6 @@ const Header = ({
     setSearchParameters(copy);
   };
 
-  //   const debouncedHandleTextFiltering = useCallback(
-  //     debounce(handleTextFiltering, 300),
-  //     []
-  //   );
 
   return (
     <>
@@ -49,27 +40,21 @@ const Header = ({
         <Link to={"/"}>
           <img src={logo} alt="Logo de Vinted" className="logo" />
         </Link>
-        <input
-          //   onChange={(e) => {
-          //     const copy = { ...searchParameters };
-          //     copy.title = e.target.value;
-          //     setSearchParameters(copy);
-          //   }}
+        <input className="input-txt header__search"
           onChange={handleTextFiltering}
           value={searchParameters.title}
           type="text"
-          placeholder="Recherche des articles"
+          placeholder="Recherche ton prochain achat !"
         />
-        <div className="login-action">
+        <div className="login-action row">
           {!token ? (
             <>
               <button
                 onClick={() => {
                   setModal(!modal);
                   setInitializeModal("SignUp");
-                  console.log(setInitializeModal);
                 }}
-                className="btn btn__login"
+                className="btn btn--ligth"
               >
                 S'inscrire
               </button>
@@ -79,14 +64,14 @@ const Header = ({
                   setModal(!modal);
                   setInitializeModal("SignIn");
                 }}
-                className="btn btn__login"
+                className="btn btn--ligth"
               >
                 Se connecter
               </button>
             </>
           ) : (
             <button
-              className="btn btn__disconnect"
+              className="btn btn--dark btn--test"
               onClick={() => {
                 disconnect();
               }}
@@ -96,12 +81,18 @@ const Header = ({
           )}
         </div>
         <div className="cta">
-          <button onClick={()=>{
-            token ? navigate("/Publish") : navigate("/Signin")}
-          } className="btn btn__cta">Vends tes articles</button>
+          <button onClick={() => {
+            if (token) {
+              navigate("/Publish")
+            } else {
+              setModal(!modal)
+              setInitializeModal("SignIn")
+            }
+          }}
+            className="btn btn--dark">Vends tes articles</button>
         </div>
       </header>
-      <div className="filter">
+      <div className="filter container row">
         <label htmlFor="pricemin">Prix minimum</label>
         <input
           onChange={(e) => {
@@ -114,6 +105,7 @@ const Header = ({
           placeholder="0"
           name="pricemin"
           id="pricemin"
+          className="input-txt small-input"
         />
         <label htmlFor="pricemax">Prix maximum</label>
         <input
@@ -126,9 +118,10 @@ const Header = ({
           type="number"
           name="pricemax"
           id="pricemax"
-          placeholder={999999}
+          placeholder={9999}
+          className="input-txt small-input"
         />
-        <label htmlFor="sortArticles">Tri par prix décroissant ? </label>
+        <label className="sortCheckboxLabel" htmlFor="sortArticles"></label>
         <input
           onClick={() => {
             const copy = { ...searchParameters };
@@ -138,6 +131,7 @@ const Header = ({
           type="checkbox"
           name="sortArticles"
           id="sortArticles"
+          className="sortCheckbox"
         />
       </div>
     </>

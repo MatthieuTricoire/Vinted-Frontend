@@ -10,11 +10,11 @@ const Article = ({ offer }) => {
     >
       {/* <div className="article column"> */}
       <div className="article__user row">
-        {/*{offer.owner.account.avatar &&  <img
-            src={offer.owner.account.avatar.url}
-            alt=""
-            className="article__user__img"
-          /> }*/}
+        {offer.owner.account.avatar && <img
+          src={offer.owner.account.avatar.url}
+          alt=""
+          className="article__user__img"
+        />}
         <span className="article__user__pseudo">
           {offer.owner.account.username}
         </span>
@@ -24,9 +24,9 @@ const Article = ({ offer }) => {
       </div>
       <div className="article__details row">
         <div className="col article__details__txt column">
-          <div className="article__details__price">{offer.product_price} €</div>
+          <div className="article__details__price">{offer.product_price.toFixed(2)} €</div>
           <div className="article__details__price__taxes">
-            {offer.product_price * 1.2} €
+            {(offer.product_price * 1.2).toFixed(2)} €
           </div>
           <div className="article__details__size">
             {offer.product_details[1].TAILLE}

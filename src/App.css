@@ -11,13 +11,22 @@
   /*? fonts families */
   --ff-primary: Lato, sans-serif;
 
+  /*? fonts sizes */
+  --fs-900: 34px;
+  --fs-800: 24px;
+  --fs-600: 16px;
+  --fs-400: 14px;
+  --fs-300: 12px;
+
   /*? fonts colors  */
 
   --clr-primary-000: white;
+  --clr-primary-200: hsl(208, 13%, 96%);
+  --clr-primary-400: hsl(0, 0%, 60%);
+  --clr-primary-500: hsl(0, 0%, 40%);
   --clr-primary-900: black;
-  --clr-primary-400: #999999;
-
-  --clr-accent-400: #2cb1ba;
+  --clr-accent-400: hsl(184, 60%, 45%);
+  --clr-accent-400-hover: hsl(184, 60%, 40%);
 }
 
 /*? General  */
@@ -25,23 +34,73 @@
 body {
   margin: 0;
   font-family: var(--ff-primary);
+  font-size: var(--fs-400);
 }
-button {
-  padding: 0.3em 1em;
-  color: var(--clr-primary-000);
+
+.btn {
+  padding: 0.5em 1em;
   font-family: inherit;
-  background-color: var(--clr-accent-400);
   border-radius: 5px;
-  border: none;
+  text-align: center;
+  cursor: pointer;
 }
+
+.btn:active {
+  scale: 1.05;
+}
+
+.btn--dark {
+  color: var(--clr-primary-000);
+  background-color: var(--clr-accent-400);
+  border: solid 1px var(--clr-accent-400);
+}
+
+.btn--dark:hover {
+  background-color: var(--clr-accent-400-hover);
+  border: solid 1px var(--clr-accent-400-hover);
+}
+
+.btn--ligth {
+  color: var(--clr-accent-400);
+  background-color: var(--clr-primary-000);
+  border: solid 1px var(--clr-accent-400);
+}
+
+.btn--ligth:hover {
+  color: var(--clr-accent-400-hover);
+  border-color: var(--clr-accent-400-hover);
+}
+
+.input-txt {
+  background-color: var(--clr-primary-200);
+  background-color: hsl(208, 13%, 96%);
+  border-radius: 5px;
+  border: 1px solid var(--clr-primary-200);
+  padding: 5px 10px;
+  outline: none;
+}
+
+.input-txt:hover,
+:focus {
+  border-color: var(--clr-primary-400);
+}
+
+.small-input {
+  width: 100px;
+  text-align: center;
+}
+
 img {
   max-width: 100%;
 }
 
 h1 {
-  font-size: 34px;
+  font-size: var(--fs-900);
   line-height: 43px;
-  color: #171717;
+}
+
+h2 {
+  font-size: var(--fs-800);
 }
 
 section {
@@ -77,10 +136,26 @@ section {
   height: 60px;
 }
 
+.header__search {
+  width: 300px;
+  height: 30px;
+
+  padding-left: 10px;
+}
+
+/** Filters   */
+
+.filter {
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
 /*? Main  */
 /** Hero  */
 .hero {
-  height: 300px;
+  height: 350px;
   background-image: url(./Assets/Img/Hero-Banner.jpeg);
   background-size: cover;
   background-position: center;
@@ -88,14 +163,19 @@ section {
 }
 
 .hero__card {
-  width: 318px;
-  height: 233px;
-  background-color: white;
+  width: 350px;
+  height: 230px;
+  background-color: var(--clr-primary-000);
   padding: 2em;
   margin-left: 100px;
   border-radius: 5px;
 }
 
+.hero__card__btn {
+  font-size: var(--fs-600);
+  width: 60%;
+  margin-top: 35px;
+}
 .articles {
   flex-wrap: wrap;
   gap: 20px;
@@ -105,11 +185,26 @@ section {
 .article {
   width: calc((100% - 120px) / 5);
   gap: 10px;
+  color: var(--clr-primary-400);
+  font-size: var(--fs-300);
+}
+.article__user {
+  height: 30px;
+  align-items: center;
+  gap: 10px;
+}
+.article__user__img {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+}
+.article__picture {
+  border-radius: 3px;
+  overflow: hidden;
 }
 .article__picture img {
   width: 100%;
   height: 300px;
-
   object-fit: cover;
 }
 
@@ -117,37 +212,76 @@ section {
   gap: 5px;
 }
 
+.article__details__price {
+  color: var(--clr-primary-900);
+  font-size: var(--fs-600);
+}
+
 /*? Offer page  */
 
-.background-offer {
-  border: solid 1px red;
+.background {
   background-color: hsl(179, 11%, 96%);
 }
 .offer {
   padding-block: 3rem;
-  justify-content: space-evenly;
-  height: 100%;
+  justify-content: space-between;
+  height: 600px;
+  gap: 30px;
+  padding-inline: 100px;
 }
 
 .offer__img {
-  height: 300px;
   object-fit: contain;
+  height: 100%;
+  width: 100%;
 }
 
 .offer__description {
+  width: 400px;
   background-color: white;
   border-radius: 5px;
-  border: solid 1px red;
   padding: 3rem;
   justify-content: space-between;
 }
 
-/*? Login page */
+.offer__description__price {
+  font-size: var(--fs-900);
+}
 
-.btn__login {
-  background-color: var(--clr-primary-000);
-  color: var(--clr-accent-400);
-  border: solid 1px var(--clr-accent-400);
+.offer__description__details {
+  margin-top: 30px;
+  text-transform: uppercase;
+}
+
+.detail {
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.offer__description__details__static {
+  color: var(--clr-primary-400);
+  width: 60%;
+}
+
+.offer__description__details__dynamic {
+  color: var(--clr-primary-500);
+  width: 30%;
+}
+
+.offer__description__title {
+  margin-top: 80px;
+  font-size: var(--fs-800);
+}
+
+.offer__description__owner {
+  margin-top: 20px;
+  font-size: var(--fs-600);
+  color: var(--clr-primary-400);
+  margin-bottom: 80px;
+}
+/*? Login page */
+.login-action {
+  gap: 20px;
 }
 /*? Modal */
 
@@ -161,9 +295,9 @@ section {
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.1);
-
   backdrop-filter: blur(3px);
 }
+
 .modal__container {
   background-color: white;
   border-radius: 10px;
@@ -175,18 +309,109 @@ section {
 }
 
 /*? Form */
-
-form {
-  padding: 8em;
-
+.signup {
+  width: 400px;
+}
+.signin__form,
+.signup__form {
+  padding: 0em 4em 2em 4em;
   justify-content: center;
   align-items: center;
   gap: 10px;
+  color: var(--clr-primary-400);
 }
-form p {
-  width: 400px;
+
+.conditions {
+  font-size: var(--fs-300);
 }
 
 .checkbox {
   align-items: center;
+}
+
+/*? SignIn, Signfup page  */
+.signin__title,
+.signup__title,
+.publish__title {
+  margin-bottom: 30px;
+  color: var(--clr-primary-900);
+  text-align: center;
+}
+
+/*? Publish offer  */
+
+.publish-offer {
+  padding-inline: 100px;
+}
+.offer-section {
+  background-color: var(--clr-primary-000);
+  border-radius: 10px;
+  margin-bottom: 40px;
+  padding-block: 30px;
+  padding-inline: 200px;
+  width: 100%;
+}
+.offer-section > .col {
+  justify-content: space-evenly;
+  width: 100%;
+  gap: 20px;
+}
+/*? Custom Sort checkbox */
+/*? custom toggle button  */
+
+/** step 1 --> Hide the input element */
+.sortCheckbox {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+/** step2 --> Style the label to be used as the graphic input */
+
+.sortCheckboxLabel {
+  display: block;
+  width: 40px;
+  height: 20px;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+  background-color: var(--clr-accent-400);
+}
+
+.sortCheckbox:checked + .sortCheckboxLabel {
+  background-color: blue;
+}
+
+/** step 3 --> Create the toggle ball */
+.sortCheckboxLabel::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border-radius: 50px;
+  background-color: var(--clr-primary-000);
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: 0.5s;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+}
+
+.sortCheckbox:checked + .sortCheckboxLabel::after {
+  background-color: var(--clr-primary-000);
+}
+
+/** step 4 --> Animate the toggle ball */
+.sortCheckbox:checked + .sortCheckboxLabel:after {
+  left: 100%;
+  transform: translateX(-100%);
+}
+
+/** step 5 --> custom effect during the activation */
+
+.sortCheckboxLabel:active::after {
+  width: 30px;
+}
+
+.test {
+  border: 1px solid red;
 }

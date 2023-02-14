@@ -1,18 +1,14 @@
 //? States react import
 import { useState } from "react";
-import { useNavigate} from "react-router-dom";
-
-//? Cookies import
-import Cookies from "js-cookie";
 
 //? Axios import
 import axios from "axios";
 
-const SignIn = ({ setToken }) => {
+const SignIn = ({ handleToken, modalVisible, setModalVisible }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
+
 
   const onSubtmit = async (e) => {
     e.preventDefault();
@@ -24,18 +20,18 @@ const SignIn = ({ setToken }) => {
           password: password,
         }
       );
-      Cookies.set("token", loginInformation.data.token, { expires: 1 });
-      setToken(loginInformation.data.token);
-      navigate("/");
+      handleToken(loginInformation.data.token);
+      setModalVisible(!modalVisible)
+
     } catch (error) {
       console.log(error.message);
     }
   };
   return (
     <div className="signin">
-      <form onSubmit={onSubtmit} className="form column">
-        <h2>Se connecter</h2>
-        <input
+      <form className="signin__form column" onSubmit={onSubtmit} >
+        <h2 className="signin__title" >Se connecter</h2>
+        <input className="input-txt"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           type="email"
@@ -43,7 +39,7 @@ const SignIn = ({ setToken }) => {
           id="email"
           placeholder="Adresse mail"
         />
-        <input
+        <input className="input-txt"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           type="password"
@@ -51,7 +47,7 @@ const SignIn = ({ setToken }) => {
           id="password"
           placeholder="Mot de passe"
         />
-        <button type="submit">Se connecter</button>
+        <button className="btn btn--dark" type="submit">Se connecter</button>
       </form>
     </div>
   );

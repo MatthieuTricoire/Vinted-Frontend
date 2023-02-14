@@ -10,9 +10,9 @@ const Home = ({ data }) => {
   return (
     <div className="main">
       <div className="hero row">
-        <div className="hero__card">
+        <div className="hero__card column">
           <h1>Prêt à faire du tri dans vos placards ?</h1>
-          <button className="btn btn-cta">Vends maintenant</button>
+          <button className="btn btn--dark hero__card__btn">Vends maintenant</button>
         </div>
       </div>
       <section className="container row articles">

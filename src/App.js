@@ -1,35 +1,50 @@
 //* Packages import
 //?  React Router import
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 //? States react import
 import { useEffect, useState } from "react";
+
 //? Axios import
 import axios from "axios";
+
+//? Cookies import
+import Cookies from "js-cookie";
 
 //* Pages import
 import Home from "./Pages/Home";
 import Offer from "./Pages/Offer";
-import SignUp from "./Pages/SignUp";
-import SignIn from "./Pages/SignIn";
 import Modal from "./Components/Modal";
 import Publish from "./Pages/Publish";
+import Payment from "./Pages/Payment";
 
 //* Components import
 import "./App.css";
 import Header from "./Components/Header";
 
 function App() {
+
   //? States declaration
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(Cookies.get("token-vinted") || null);;
+
   const [modalVisible, setModalVisible] = useState(false);
   const [initializeModal, setInitializeModal] = useState("");
   const [searchParameters, setSearchParameters] = useState({ sort: true });
 
+  const handleToken = (token) => {
+    if (token) {
+      setToken(token);
+      Cookies.set("token-vinted", token, { expires: 5 })
+    } else {
+      setToken(null);
+      Cookies.remove("token-vinted")
+    }
+  }
   let searchRoute = "https://lereacteur-vinted-api.herokuapp.com/offers";
 
-//! Partie de code à refacto, /offers/&&&priceMin=10 fonctionne. Pas besoin de se prendr la tête avec une construction dymanique des queries.
+  //! Partie de code à refacto, /offers/&&&priceMin=10 fonctionne. Pas besoin de se prendr la tête avec une construction dymanique des queries.
   if (searchParameters) {
     searchRoute = searchRoute + "?";
     let firstFilter = true;
@@ -93,7 +108,7 @@ function App() {
       <Router>
         <Header
           token={token}
-          setToken={setToken}
+          handleToken={handleToken}
           modal={modalVisible}
           setModal={setModalVisible}
           initializeModal={initializeModal}
@@ -105,21 +120,17 @@ function App() {
           <Route path="/" element={<Home data={data} />}></Route>
           <Route path="/offer/:id" element={<Offer />}></Route>
           <Route
-            path="/SignIn"
-            element={<SignIn token={token} setToken={setToken} />}
-          ></Route>
-          <Route
-            path="/SignUp"
-            element={<SignUp token={token} setModalVisible={setModalVisible} modalVisible={modalVisible} setToken={setToken} />}
-          ></Route>
-      <Route
-      path="/Publish" element={<Publish token={token}/>}></Route>
+            path="/Publish" element={<Publish token={token} setModalVisible={setModalVisible} modalVisible={modalVisible} setInitializeModal={setInitializeModal} />}></Route>
+          <Route path="/Payment" element={<Payment />}></Route>
         </Routes>
         {modalVisible && (
           <Modal
+            handleToken={handleToken}
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
             initializeModal={initializeModal}
+            setInitializeModal={setInitializeModal}
+            token={token}
           />
         )}
       </Router>

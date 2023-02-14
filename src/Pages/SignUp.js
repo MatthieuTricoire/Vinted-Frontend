@@ -1,24 +1,18 @@
 //? States react import
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
 
-//? Cookies import
-import Cookies from "js-cookie";
+
 
 //? Axios import
 import axios from "axios";
 
-const SignUp = ({ setToken, setModalVisible, modalVisible }) => {
-  //   const emailRef = useRef();
-  //   const passwordRef = useRef();
-  //   const usernameRef = useRef();
-  //   const newsLetterRef = useRef(false);
+const SignUp = ({ handleToken, setModalVisible, modalVisible, initializeModal, setInitializeModal }) => {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [newsletter, setNewsletter] = useState(false);
 
-  const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -32,8 +26,8 @@ const SignUp = ({ setToken, setModalVisible, modalVisible }) => {
           newsletter: newsletter,
         }
       );
-      Cookies.set("token", loginInformation.data.token, { expires: 1 });
-      setToken(loginInformation.data.token);
+      // Cookies.set("token", loginInformation.data.token, { expires: 1 });
+      handleToken(loginInformation.data.token);
       setModalVisible(!modalVisible)
     } catch (error) {
       console.log(error.response);
@@ -41,16 +35,16 @@ const SignUp = ({ setToken, setModalVisible, modalVisible }) => {
   };
 
   return (
-    <div className="sign-up">
-      <form className="form column" onSubmit={onSubmit}>
-        <h2>S'inscrire</h2>
-        <input
+    <div className="signup">
+      <form className="signup__form column" onSubmit={onSubmit}>
+        <h2 className="signup__title" >S'inscrire</h2>
+        <input className="input-txt"
           onChange={(e) => setUsername(e.target.value)}
           value={username}
           type="text"
           placeholder="Nom d'utilisateur"
         />
-        <input
+        <input className="input-txt"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           type="text"
@@ -58,7 +52,7 @@ const SignUp = ({ setToken, setModalVisible, modalVisible }) => {
           id="email"
           placeholder="Email"
         />
-        <input
+        <input className="input-txt"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           type="password"
@@ -84,8 +78,13 @@ const SignUp = ({ setToken, setModalVisible, modalVisible }) => {
           Conditions et Politique de Confidentialité de Vinted. Je confirme
           avoir au moins 18 ans
         </p>
-        <button type="submit">S'incrire</button>
-        <Link to="/SignIn"> Tu as déjà un compte ? Connecte-toi !</Link>
+        <button className="btn btn--dark" type="submit">S'incrire</button>
+
+        {/* <Link to="/SignIn"> Tu as déjà un compte ? Connecte-toi !</Link> */}
+        <div
+          onClick={() => {
+            setInitializeModal("SignIn");
+          }}> Tu as déjà un compte ? Connecte-toi !</div>
       </form>
     </div>
   );

@@ -1,6 +1,6 @@
 //? States react import
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 //? Axios import
 import axios from "axios";
 
@@ -24,10 +24,11 @@ const Offer = () => {
     fetchData();
   }, []);
 
+  console.log(data)
   return isLoading ? (
     <p>Loading ...</p>
   ) : (
-    <div className="background-offer">
+    <div className="background">
       <div className="offer row container">
         <div className="col">
           <img
@@ -37,24 +38,23 @@ const Offer = () => {
           />
         </div>
         <div className="offer__description col">
-          <div className="offer__description__price">{data.product_price}</div>
-          <div className="offer__description__details">
-            <div className="offer__description__details___brand">
-              <span>MARQUE</span> {data.product_details[0].MARQUE}
-            </div>
-            <div className="offer__description__details___brand">
-              <span>TAILLE</span> {data.product_details[1].TAILLE}
-            </div>
-            <div className="offer__description__details___brand">
-              <span>ÉTAT</span> {data.product_details[2].ÉTAT}
-            </div>
-            <div className="offer__description__details___brand">
-              <span>COULEUR</span> {data.product_details[3].COULEUR}
-            </div>
-            <div className="offer__description__details___brand">
-              <span>EMPLACEMENT</span> {data.product_details[4].EMPLACEMENT}
-            </div>
+          <div className="offer__description__price">{data.product_price.toFixed(2)}€</div>
+          <div className="offer__description__details column">
+            {data.product_details.map((detail, index) => {
+              const key = Object.keys(detail)[0];
+              return (
+                <div className="detail row" key={index}>
+                  <div className="offer__description__details__static"
+                  >{key} </div>
+                  <div className="offer__description__details__dynamic"
+                  >{detail[key]}</div>
+                </div>
+              )
+            })}
           </div>
+          <div className="offer__description__title">{data.product_name}</div>
+          <div className="offer__description__owner">{data.owner.account.username}</div>
+          <Link to="/Payment" className="btn btn--dark" state={{ data: data }}>Acheter</Link>
         </div>
       </div>
     </div>
