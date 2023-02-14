@@ -24,6 +24,7 @@ const Payment = () => {
     const shippingFee = 5.2
     const totalPrice = price * 1 + fee * 1 + shippingFee * 1
     const totalPriceCents = totalPrice * 1000
+    const totalPriceCentsString = totalPriceCents.toString()
     const product_description = data.state.data.product_description
     return (
         <div className="section">
@@ -45,7 +46,7 @@ const Payment = () => {
             <div> Total {totalPrice} €</div>
 
             <Elements stripe={stripePromise} >
-                <CheckoutForm user_id={user_id} amount={totalPriceCents} title={product_description} />
+                <CheckoutForm user_id={user_id} amount={totalPriceCentsString} title={product_description} />
             </Elements>
 
 
